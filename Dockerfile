@@ -1,4 +1,4 @@
-FROM java:8-jre
+FROM registry.dataos.io/library/java:8-jre
 
 # grab gosu for easy step-down from root
 ENV GOSU_VERSION 1.7
@@ -42,7 +42,7 @@ RUN set -ex \
 	done
 
 COPY config ./config
-
+RUN /usr/share/elasticsearch/bin/elasticsearch-plugin install x-pack && /usr/share/elasticsearch/bin/elasticsearch
 VOLUME /usr/share/elasticsearch/data
 
 COPY docker-entrypoint.sh /
